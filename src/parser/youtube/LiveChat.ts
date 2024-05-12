@@ -5,6 +5,7 @@ import { Parser, LiveChatContinuation } from '../index.js';
 import SmoothedQueue from './SmoothedQueue.js';
 
 import AddChatItemAction from '../classes/livechat/AddChatItemAction.js';
+import AddToToastAction from '../classes/livechat/AddToToastAction.js';
 import UpdateDateTextAction from '../classes/livechat/UpdateDateTextAction.js';
 import UpdateDescriptionAction from '../classes/livechat/UpdateDescriptionAction.js';
 import UpdateTitleAction from '../classes/livechat/UpdateTitleAction.js';
@@ -261,7 +262,7 @@ class LiveChat extends EventEmitter {
     if (!response.actions)
       throw new InnertubeError('Unexpected response from send_message', response);
 
-    return response.actions.array().as(AddChatItemAction);
+    return response.actions.array().as(AddChatItemAction, AddToToastAction);
   }
 
   /**

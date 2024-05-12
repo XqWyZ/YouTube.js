@@ -1,6 +1,6 @@
 import { YTNode } from '../../helpers.js';
 import type { RawNode } from '../../index.js';
-import { NavigationEndpoint } from '../../nodes';
+import NavigationEndpoint from '../NavigationEndpoint.js';
 
 export default class ClientSideToggleMenuItem extends YTNode {
   static type = 'ClientSideToggleMenuItem';
