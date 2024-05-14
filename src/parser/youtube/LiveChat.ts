@@ -5,8 +5,6 @@ import { Parser, LiveChatContinuation } from '../index.js';
 import SmoothedQueue from './SmoothedQueue.js';
 
 import AddChatItemAction from '../classes/livechat/AddChatItemAction.js';
-import AddToToastAction from '../classes/livechat/AddToToastAction.js';
-import DimChatItemAction from '../classes/livechat/DimChatItemAction.js';
 import UpdateDateTextAction from '../classes/livechat/UpdateDateTextAction.js';
 import UpdateDescriptionAction from '../classes/livechat/UpdateDescriptionAction.js';
 import UpdateTitleAction from '../classes/livechat/UpdateTitleAction.js';
@@ -251,7 +249,10 @@ class LiveChat extends EventEmitter {
    * Sends a message.
    * @param text - Text to send.
    */
-  async sendMessage(text: string): Promise<ObservedArray<AddChatItemAction | AddToToastAction | DimChatItemAction>> {
+  async sendMessage(text: string): Promise<ObservedArray<AddChatItemAction>> {
+    if (text.length > 200)
+      throw new InnertubeError('Cannot send message. Text is longer than 200 characters.', text);
+
     const response = await this.#actions.execute('/live_chat/send_message', {
       params: Proto.encodeMessageParams(this.#channel_id, this.#video_id),
       richMessage: { textSegments: [ { text } ] },
@@ -263,7 +264,7 @@ class LiveChat extends EventEmitter {
     if (!response.actions)
       throw new InnertubeError('Unexpected response from send_message', response);
 
-    return response.actions.array().as(AddChatItemAction, AddToToastAction, DimChatItemAction);
+    return response.actions.array().as(AddChatItemAction);
   }
 
   /**
