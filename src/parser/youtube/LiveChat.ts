@@ -4,6 +4,8 @@ import { InnertubeError, Platform } from '../../utils/Utils.js';
 import { Parser, LiveChatContinuation } from '../index.js';
 import SmoothedQueue from './SmoothedQueue.js';
 
+import AddChatItemAction from '../classes/livechat/AddChatItemAction.js';
+import AddToToastAction from '../classes/livechat/AddToToastAction.js';
 import UpdateDateTextAction from '../classes/livechat/UpdateDateTextAction.js';
 import UpdateDescriptionAction from '../classes/livechat/UpdateDescriptionAction.js';
 import UpdateTitleAction from '../classes/livechat/UpdateTitleAction.js';
@@ -15,7 +17,6 @@ import ItemMenu from './ItemMenu.js';
 import type { ObservedArray, YTNode } from '../helpers.js';
 
 import type VideoInfo from './VideoInfo.js';
-import type AddChatItemAction from '../classes/livechat/AddChatItemAction.js';
 import type AddBannerToLiveChatCommand from '../classes/livechat/AddBannerToLiveChatCommand.js';
 import type RemoveBannerForLiveChatCommand from '../classes/livechat/RemoveBannerForLiveChatCommand.js';
 import type ShowLiveChatTooltipCommand from '../classes/livechat/ShowLiveChatTooltipCommand.js';
@@ -249,7 +250,7 @@ class LiveChat extends EventEmitter {
    * Sends a message.
    * @param text - Text to send.
    */
-  async sendMessage(text: string): Promise<ObservedArray> {
+  async sendMessage(text: string): Promise<ObservedArray<AddChatItemAction | AddToToastAction>> {
     const response = await this.#actions.execute('/live_chat/send_message', {
       params: Proto.encodeMessageParams(this.#channel_id, this.#video_id),
       richMessage: { textSegments: [ { text } ] },
@@ -261,7 +262,7 @@ class LiveChat extends EventEmitter {
     if (!response.actions)
       throw new InnertubeError('Unexpected response from send_message', response);
 
-    return response.actions.array();
+    return response.actions.array().as(AddChatItemAction, AddToToastAction);
   }
 
   /**
