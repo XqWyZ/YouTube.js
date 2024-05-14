@@ -371,6 +371,7 @@ export { default as StructuredDescriptionPlaylistLockup } from './classes/Struct
 export { default as SubFeedOption } from './classes/SubFeedOption.js';
 export { default as SubFeedSelector } from './classes/SubFeedSelector.js';
 export { default as SubscribeButton } from './classes/SubscribeButton.js';
+export { default as SubscribeButtonView } from './classes/SubscribeButtonView.js';
 export { default as SubscriptionNotificationToggleButton } from './classes/SubscriptionNotificationToggleButton.js';
 export { default as Tab } from './classes/Tab.js';
 export { default as Tabbed } from './classes/Tabbed.js';
