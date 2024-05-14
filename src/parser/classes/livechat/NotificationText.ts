@@ -1,5 +1,5 @@
 import { YTNode } from '../../helpers.js';
-import Text from './Text.js';
+import Text from '../misc/Text.js';
 import type { RawNode } from '../../index.js';
 
 export default class NotificationText extends YTNode {

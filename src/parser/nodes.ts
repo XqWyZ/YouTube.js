@@ -194,6 +194,7 @@ export { default as PollHeader } from './classes/livechat/items/PollHeader.js';
 export { default as LiveChatActionPanel } from './classes/livechat/LiveChatActionPanel.js';
 export { default as MarkChatItemAsDeletedAction } from './classes/livechat/MarkChatItemAsDeletedAction.js';
 export { default as MarkChatItemsByAuthorAsDeletedAction } from './classes/livechat/MarkChatItemsByAuthorAsDeletedAction.js';
+export { default as NotificationText } from './classes/livechat/NotificationText.js';
 export { default as RemoveBannerForLiveChatCommand } from './classes/livechat/RemoveBannerForLiveChatCommand.js';
 export { default as RemoveChatItemAction } from './classes/livechat/RemoveChatItemAction.js';
 export { default as RemoveChatItemByAuthorAction } from './classes/livechat/RemoveChatItemByAuthorAction.js';
